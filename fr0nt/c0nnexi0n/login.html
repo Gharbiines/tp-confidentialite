@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beneccion - Signup/Login</title>
+  <link rel="stylesheet" href="login.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <i class="fas fa-stethoscope"></i>
+    <h1>Beneccion</h1>
+    <p>Plateforme Santé Sécurisée</p>
+  </div>
+
+  <div class="form-container">
+
+    <!-- SIGNUP -->
+    <div id="signupStep" class="step active">
+      <h2>Inscription</h2>
+
+      <input type="text" id="signupUsername" placeholder="Nom d'utilisateur">
+      <input type="email" id="signupEmail" placeholder="Email">
+      <input type="password" id="signupPassword" placeholder="Mot de passe">
+      
+      <select id="signupRole">
+        <option value="" disabled selected>Choisir un rôle</option>
+        <option value="medcin">Médecin</option>
+        <option value="patient">Patient</option>
+        <option value="admin">Administrateur</option>
+      </select>
+
+      <!-- Champs médecins -->
+      <input type="text" id="signupSpecialite" placeholder="Spécialité (médecin)" style="display:none;">
+      <input type="text" id="signupService" placeholder="Service (chef seulement)" style="display:none;">
+      <label>
+        <input type="checkbox" id="signupIsChef"> Chef de service
+      </label>
+
+      <label>
+        <input type="checkbox" id="signupMfaEnabled"> Activer MFA
+      </label>
+
+      <button type="button" class="btn-primary" onclick="signup()">S'inscrire</button>
+      <p class="link">Vous avez déjà un compte ? <a href="#" onclick="showLogin()">Se connecter</a></p>
+
+      <div id="signupMessage" class="message"></div>
+    </div>
+
+    <!-- LOGIN -->
+    <div id="loginStep" class="step">
+      <h2>Connexion</h2>
+      <input type="email" id="loginEmail" placeholder="Email">
+      <input type="password" id="loginPassword" placeholder="Mot de passe">
+      <div id="loginMfaContainer" style="display:none;">
+        <input type="text" id="loginMfaCode" placeholder="Code MFA" maxlength="6">
+      </div>
+      <button type="button" class="btn-primary" onclick="login()">Se connecter</button>
+      <p class="link">Pas encore inscrit ? <a href="#" onclick="showSignup()">Créer un compte</a></p>
+
+      <div id="loginMessage" class="message"></div>
+    </div>
+
+    <!-- QR Code MFA -->
+    <div id="qrStep" class="step">
+      <h2>Configuration MFA</h2>
+      <p>Scannez ce QR code avec Google Authenticator :</p>
+      <img id="qrImage" src="" alt="QR Code MFA">
+      <button type="button" class="btn-primary" onclick="showLogin()">Continuer vers login</button>
+    </div>
+
+  </div>
+
+</div>
+
+<script src="l0gin.js"></script>
+</body>
+</html>

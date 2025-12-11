@@ -32,10 +32,11 @@ async function login({ email, password, code }) {
   const valid = await user.comparePassword(password);
   if (!valid) throw new Error("Mot de passe incorrect");
 
+  // Vérification MFA uniquement si activé
   if (user.mfaEnabled) {
     if (!code) throw new Error("Code MFA requis");
+    if (!user.mfaSecret) throw new Error("Utilisateur MFA mal configuré");
 
-    // 🔐 Déchiffrer le secret avant vérification
     const decryptedSecret = decrypt(user.mfaSecret);
     const mfaValid = verifyTOTP(code, decryptedSecret);
     if (!mfaValid) throw new Error("Code MFA invalide");
@@ -43,6 +44,7 @@ async function login({ email, password, code }) {
 
   return { user };
 }
+
 
 // -------------------- GENERER MFA --------------------
 async function generateMfa(userId) {
