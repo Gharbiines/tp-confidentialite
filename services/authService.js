@@ -1,7 +1,8 @@
 const User = require("../models/user.model");
+const { encrypt, decrypt } = require("../utils/cryptSecret");
 const { generateMfaSecret, generateQRCode, verifyTOTP } = require("../utils/mfa");
 
-// Signup
+// -------------------- SIGNUP --------------------
 async function signup({ username, email, password, type, specialite, isChef, service, mfaEnabled }) {
   const existing = await User.findOne({ $or: [{ email }, { username }] });
   if (existing) throw new Error("Email ou username déjà utilisé");
@@ -11,7 +12,11 @@ async function signup({ username, email, password, type, specialite, isChef, ser
   let qrCodeUrl = null;
   if (mfaEnabled) {
     const secret = generateMfaSecret(username);
-    user.mfaSecret = secret.base32;
+
+    // 🔐 Chiffrer le secret avant stockage
+    user.mfaSecret = encrypt(secret.base32);
+
+    // QR code pour Google Authenticator
     qrCodeUrl = await generateQRCode(secret.otpauth_url);
   }
 
@@ -19,7 +24,7 @@ async function signup({ username, email, password, type, specialite, isChef, ser
   return { user, qrCodeUrl };
 }
 
-// Login
+// -------------------- LOGIN --------------------
 async function login({ email, password, code }) {
   const user = await User.findOne({ email });
   if (!user) throw new Error("Utilisateur non trouvé");
@@ -29,11 +34,43 @@ async function login({ email, password, code }) {
 
   if (user.mfaEnabled) {
     if (!code) throw new Error("Code MFA requis");
-    const mfaValid = verifyTOTP(code, user.mfaSecret);
+
+    // 🔐 Déchiffrer le secret avant vérification
+    const decryptedSecret = decrypt(user.mfaSecret);
+    const mfaValid = verifyTOTP(code, decryptedSecret);
     if (!mfaValid) throw new Error("Code MFA invalide");
   }
 
   return { user };
 }
 
-module.exports = { signup, login };
+// -------------------- GENERER MFA --------------------
+async function generateMfa(userId) {
+  const user = await User.findById(userId);
+  if (!user) throw new Error("Utilisateur non trouvé");
+
+  const secret = generateMfaSecret(user.username);
+
+  // 🔐 Chiffrer le secret avant stockage
+  user.mfaSecret = encrypt(secret.base32);
+  user.mfaEnabled = true;
+
+  await user.save();
+
+  const qrCodeUrl = await generateQRCode(secret.otpauth_url);
+  return { qrCodeUrl };
+}
+
+// -------------------- VERIFIER MFA --------------------
+async function verifyMfa(userId, code) {
+  const user = await User.findById(userId);
+  if (!user || !user.mfaSecret) throw new Error("Utilisateur invalide");
+
+  const decryptedSecret = decrypt(user.mfaSecret);
+  const mfaValid = verifyTOTP(code, decryptedSecret);
+  if (!mfaValid) throw new Error("Code MFA invalide");
+
+  return user;
+}
+
+module.exports = { signup, login, generateMfa, verifyMfa };

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Beneccion - Connexion</title>
+  <link rel="stylesheet" href="login.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <i class="fas fa-stethoscope"></i>
+      <h1>Beneccion</h1>
+      <p>Plateforme Santé Sécurisée</p>
+    </div>
+
+    <div class="form-container">
+
+      <!-- ÉTAPE 1 : Choix du rôle + identifiant -->
+      <div id="step1" class="step active">
+        <h2>Connexion</h2>
+        <p class="subtitle">Sélectionnez votre profil</p>
+
+        <select id="userRole" class="role-select">
+          <option value="" disabled selected>Choisir un rôle</option>
+          <option value="medecin">Médecin</option>
+
+          <option value="patient">Patient</option>
+          <option value="admin">Administrateur</option>
+        </select>
+
+        <input type="text" id="identifier" placeholder="Email ou téléphone ou matricule" />
+
+        <button class="btn-primary" onclick="nextStep(2)">Continuer</button>
+
+        <p class="link">Première visite ? <a href="#">Créer un compte</a></p>
+      </div>
+
+      <!-- ÉTAPE 2 : Mot de passe -->
+      <div id="step2" class="step">
+        <h2>Mot de passe</h2>
+        <div class="role-badge" id="roleBadge"></div>
+        <input type="password" id="password" placeholder="Votre mot de passe sécurisé" />
+        <button class="btn-primary" onclick="nextStep(3)">Se connecter</button>
+        <div class="back-link" onclick="prevStep(1)">Changer de profil</div>
+      </div>
+
+      <!-- ÉTAPE 3 : 2FA -->
+      <div id="step3" class="step">
+        <h2>Code de vérification</h2>
+        <p class="subtitle">Code envoyé par SMS à <strong id="maskedPhone">06 •• •• •• 78</strong></p>
+        <div class="code-inputs">
+          <input type="text" maxlength="1" class="code-digit"/>
+          <input type="text" maxlength="1" class="code-digit"/>
+          <input type="text" maxlength="1" class="code-digit"/>
+          <input type="text" maxlength="1" class="code-digit"/>
+          <input type="text" maxlength="1" class="code-digit"/>
+          <input type="text" maxlength="1" class="code-digit"/>
+        </div>
+        <button class="btn-primary" onclick="nextStep(4)">Vérifier</button>
+        <div class="back-link" onclick="prevStep(2)">Retour</div>
+      </div>
+
+      <!-- ÉTAPE 4 : Biométrie + Succès -->
+      <div id="step4" class="step">
+        <div class="biometric">
+          <div class="face-circle" id="faceCircle">
+            <i class="fas fa-fingerprint"></i>
+          </div>
+          <h2 id="bioTitle">Authentification biométrique</h2>
+          <p id="bioText">Appuyez sur le capteur d'empreinte ou utilisez Face ID</p>
+          <button class="btn-yellow" onclick="usePasswordInstead()">Utiliser le mot de passe</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
