@@ -1,0 +1,65 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', sans-serif; background: #f3f4f6; color: #2d3748; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+.page { display: none; min-height: 100vh; }
+.page.active { display: block; }
+
+.grid-patient { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+@media (min-width: 1024px) { .grid-patient { grid-template-columns: 1fr 2fr; } }
+.chat-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+@media (min-width: 1024px) { .chat-grid { grid-template-columns: 1fr 2fr; } }
+
+.header { background: white; border-bottom: 1px solid #e2e8f0; padding: 1rem 0; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+.header-content { display: flex; justify-content: space-between; align-items: center; }
+.logo { display: flex; align-items: center; gap: 1rem; }
+.logo i { font-size: 2.5rem; color: #27ae60; }
+.logo h1 { font-size: 1.8rem; font-weight: bold; }
+.user { display: flex; align-items: center; gap: 1rem; }
+.avatar { width: 48px; height: 48px; background: #27ae60; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; }
+.back-btn { background: none; border: none; color: #27ae60; font-size: 1.1rem; cursor: pointer; font-weight: 600; }
+
+.card { background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); overflow: hidden; }
+.search-bar { padding: 1.5rem; border-bottom: 1px solid #e2e8f0; }
+.search-bar input { width: 100%; padding: 0.75rem 1rem; border: 1px solid #cbd5e0; border-radius: 8px; font-size: 1rem; }
+.table { width: 100%; }
+.table th { background: #f7fafc; padding: 1rem 1.5rem; text-align: left; font-size: 0.8rem; text-transform: uppercase; color: #718096; }
+.table td { padding: 1.25rem 1.5rem; }
+.patient-row { cursor: pointer; transition: background 0.2s; }
+.patient-row:hover { background: #f0fff4; }
+
+.status { padding: 0.35rem 0.75rem; border-radius: 999px; font-size: 0.8rem; font-weight: bold; }
+.status.ok { background: #d4edda; color: #155724; }
+.status.fail { background: #f8d7da; color: #721c24; }
+.status.soon { background: #fff3cd; color: #856404; }
+
+.actions-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+@media (min-width: 640px) { .actions-grid { grid-template-columns: repeat(3, 1fr); } }
+.action-btn { padding: 2rem; border: none; border-radius: 12px; color: white; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
+.action-btn i { font-size: 2.5rem; margin-bottom: 0.75rem; display: block; }
+.action-btn:hover { transform: translateY(-4px); }
+.action-btn { background: #27ae60; }
+.action-btn.yellow { background: #f39c12; }
+.action-btn.active { ring: 4px solid rgba(39,174,96,0.4); box-shadow: 0 0 0 4px rgba(39,174,96,0.3); }
+
+.tab-card { display: none; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+.tab-card.active { display: block; }
+
+.btn-primary { background: #27ae60; color: white; padding: 0.5rem 1.2rem; border: none; border-radius: 8px; cursor: pointer; }
+.btn-yellow { background: #f39c12; color: white; padding: 0.75rem; border: none; border-radius: 8px; cursor: pointer; }
+
+.chat-box { display: flex; flex-direction: column; height: 600px; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); background: white; }
+.chat-header { background: #27ae60; color: white; padding: 1rem 1.5rem; font-weight: bold; font-size: 1.1rem; }
+.chat-messages { flex: 1; padding: 1.5rem; overflow-y: auto; background: #f8fff9; }
+.msg { margin-bottom: 1.5rem; max-width: 80%; }
+.msg.sent { margin-left: auto; }
+.msg.sent p { background: #d4edda; color: #155724; padding: 0.75rem 1rem; border-radius: 18px 18px 0 18px; }
+.msg.received p { background: #e2e8f0; padding: 0.75rem 1rem; border-radius: 18px 18px 18px 0; }
+.msg span { font-size: 0.75rem; color: #718096; display: block; margin-top: 0.25rem; text-align: right; }
+.chat-input { display: flex; padding: 1rem; background: white; border-top: 1px solid #e2e8f0; }
+.chat-input input { flex: 1; padding: 0.75rem 1rem; border: 1px solid #cbd5e0; border-radius: 999px 0 0 999px; outline: none; }
+.chat-input button { background: #27ae60; color: white; border: none; padding: 0 2rem; border-radius: 0 999px 999px 0; cursor: pointer; }
+
+.flex-between { display: flex; justify-content: space-between; align-items: center; }
+.mt-8 { margin-top: 2rem; }
+.blood { color: #e74c3c; font-weight: bold; }

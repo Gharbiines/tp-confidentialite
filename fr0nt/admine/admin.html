@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Beneccion - Administrateur & Chef de Service</title>
+  <link rel="stylesheet" href="./admin.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container header-content">
+      <div class="logo">
+        <i class="fas fa-crown text-yellow-500"></i>
+        <h1>Beneccion <span class="badge-admin">ADMIN </span></h1>
+      </div>
+      <div class="user-info">
+        <img src="https://randomuser.me/api/portraits/men/46.jpg" class="profile-pic" />
+        <span>Dr. Martin Dupont</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="container main-grid">
+
+    <!-- SIDEBAR -->
+    <nav class="sidebar">
+      <ul>
+        <li class="nav-item active" data-tab="dashboard">
+          <i class="fas fa-tachometer-alt"></i> Tableau de bord
+        </li>
+        <li class="nav-item" data-tab="audit">
+          <i class="fas fa-history"></i> Journal d'Audit
+        </li>
+        <li class="nav-item" data-tab="validation">
+          <i class="fas fa-user-check"></i"></i> Validation Utilisateurs
+        </li>
+        <li class="nav-item" data-tab="droits">
+          <i class="fas fa-user-shield"></i> Gestion des Droits
+        </li>
+        <li class="nav-item" data-tab="equipe">
+          <i class="fas fa-users"></i> Mon Équipe (Cardiologie)
+        </li>
+        <li class="nav-item" data-tab="patients">
+          <i class="fas fa-hospital-user"></i> Patients du Service
+        </li>
+      </ul>
+      <div class="logout">
+        <i class="fas fa-sign-out-alt"></i> Déconnexion
+      </div>
+    </nav>
+
+    <!-- CONTENU PRINCIPAL -->
+    <main class="content" id="mainContent">
+      <!-- Chargé dynamiquement par JS -->
+    </main>
+
+  </div>
+
+  <!-- TEMPLATES -->
+  <template id="tpl-dashboard">
+    <h2 class="section-title">Tableau de bord global</h2>
+    <div class="stats-grid">
+      <div class="stat-card"><h3>124</h3><p>Médecins</p></div>
+      <div class="stat-card"><h3>2 847</h3><p>Patients</p></div>
+      <div class="stat-card"><h3>18</h3><p>En attente validation</p></div>
+      <div class="stat-card"><h3>87</h3><p>Mes patients (Cardio)</p></div>
+    </div>
+  </template>
+
+  <template id="tpl-audit">
+    <h2 class="section-title">Journal d'Audit (Dernières 50 actions)</h2>
+    <table class="table">
+      <thead><tr><th>Heure</th><th>Utilisateur</th><th>Rôle</th><th>Action</th><th>IP</th></tr></thead>
+      <tbody>
+        <tr><td>10/12/2025 14:32</td><td>Dr. Martin Dupont</td><td>Chef</td><td>Connexion</td><td>82.64.123.45</td></tr>
+        <tr><td>10/12/2025 14:28</td><td>marie.dupont@email.com</td><td>Patient</td><td>Téléchargement PDF</td><td>78.192.45.11</td></tr>
+        <tr><td>10/12/2025 13:55</td><td>admin@hopital.fr</td><td>Admin</td><td>Validation Dr. Laurent</td><td>192.168.1.100</td></tr>
+      </tbody>
+    </table>
+  </template>
+
+  <template id="tpl-validation">
+    <h2 class="section-title">Validation des nouveaux utilisateurs (18)</h2>
+    <div class="waiting-list">
+      <div class="waiting-card">
+        <strong>Dr. Sophie Laurent</strong> — Médecin Cardiologie<br>
+        <small>INSEE: 1234567890123 • Diplôme vérifié</small><br><br>
+        <button class="btn-success">Approuver</button>
+        <button class="btn-danger">Refuser</button>
+      </div>
+      <div class="waiting-card">
+        <strong>Pharmacie des Lilas</strong> — Pharmacie<br>
+        <small>SIRET: 82345678900012</small><br><br>
+        <button class="btn-success">Approuver</button>
+        <button class="btn-danger">Refuser</button>
+      </div>
+    </div>
+  </template>
+
+  <template id="tpl-droits">
+    <h2 class="section-title">Gestion des droits d'accès</h2>
+    <table class="table">
+      <thead><tr><th>Rôle</th><th>Patients</th><th>Ordonnances</th><th>Analyses</th><th>Audit</th><th>Validation</th></tr></thead>
+      <tbody>
+        <tr><td>Médecin</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Lecture</td><td>Non</td></tr>
+        <tr><td>Chef de service</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td><td>Oui</td></tr>
+        <tr><td>Laboratoire</td><td>Non</td><td>Non</td><td>Oui</td><td>Non</td><td>Non</td></tr>
+      </tbody>
+    </table>
+  </template>
+
+  <template id="tpl-equipe">
+    <h2 class="section-title">Mon équipe — Service Cardiologie (12 médecins)</h2>
+    <div class="team-grid">
+      <div class="team-card">
+        <img src="https://randomuser.me/api/portraits/women/68.jpg" />
+        <strong>Dr. Léa Moreau</strong><br>Cardiologue
+      </div>
+      <div class="team-card">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" />
+        <strong>Dr. Ahmed Benali</strong><br>Cardiologue interventionnel
+      </div>
+      <!-- +10 autres -->
+    </div>
+  </template>
+
+  <template id="tpl-patients">
+    <h2 class="section-title">Patients du service Cardiologie (87)</h2>
+    <input type="text" placeholder="Rechercher un patient..." class="search-bar" />
+    <div class="patient-grid">
+      <div class="patient-card">Marie Dupont<br><small>08/12/2025</small></div>
+      <div class="patient-card">Paul Durand<br><small>05/12/2025</small></div>
+      <div class="patient-card">Sophie Leroy<br><small>03/12/2025</small></div>
+      <!-- etc -->
+    </div>
+  </template>
+
+  <script src="admin.js"></script>
+</body>
+</html>

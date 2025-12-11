@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Beneccion - Espace Patient</title>
+  <link rel="stylesheet" href="patient.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header-content">
+      <div class="logo">
+        <i class="fas fa-stethoscope"></i>
+        <h1>Beneccion</h1>
+      </div>
+      <div class="user-info">
+        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Marie Dupont" class="profile-pic" />
+        <span>Marie Dupont</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="container main-grid">
+    <nav class="sidebar">
+      <ul>
+        <li class="nav-item active" data-tab="profile"><i class="fas fa-user"></i> Mon Profil</li>
+        <li class="nav-item" data-tab="analyses"><i class="fas fa-vial"></i> Mes Analyses</li>
+        <li class="nav-item" data-tab="fichiers"><i class="fas fa-file-medical"></i> Fichiers Médicaux</li>
+        <li class="nav-item" data-tab="messagerie"><i class="fas fa-comments"></i> Messagerie</li>
+      </ul>
+      <div class="logout"><i class="fas fa-sign-out-alt"></i> Déconnexion</div>
+    </nav>
+
+    <main class="content">
+
+      <!-- Profil (inchangé) -->
+      <section id="profile" class="tab active">
+        <!-- ... (ton code profil d'avant reste identique) ... -->
+        <div class="card profile-card">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Marie Dupont" class="profile-large" />
+          <h2>Marie Dupont</h2>
+          <p class="age">45 ans</p>
+          <div class="info-grid">
+            <div><strong>Date de naissance</strong><span>15/03/1980</span></div>
+            <div><strong>Téléphone</strong><span>06 12 34 56 78</span></div>
+            <div><strong>Email</strong><span>marie.dupont@email.com</span></div>
+            <div><strong>Groupe sanguin</strong><span class="blood">O+</span></div>
+            <div><strong>Médecin traitant</strong><span>Dr. Martin Dupont</span></div>
+            <div><strong>Dernière visite</strong><span>08/12/2025</span></div>
+          </div>
+        </div>
+      </section>
+
+           <!-- Mes Analyses -->
+      <section id="analyses" class="tab">
+        <h2 class="section-title">Mes Résultats d'Analyses</h2>
+        <div class="results-list">
+          <div class="result-item ok">
+            <div class="result-info">
+              <h4>Bilan sanguin complet</h4>
+              <p>Laboratoire BioLab Paris</p>
+            </div>
+            <div class="result-date">08/12/2025</div>
+            <div class="result-status ok">Normal</div>
+          </div>
+          <div class="result-item fail">
+            <div class="result-info">
+              <h4>Glycémie à jeun</h4>
+              <p>Laboratoire Cerba</p>
+            </div>
+            <div class="result-date">15/11/2025</div>
+            <div class="result-status fail">Anormal</div>
+          </div>
+          <div class="result-item ok">
+            <div class="result-info">
+              <h4>Bilan thyroïdien</h4>
+              <p>Laboratoire SynLab</p>
+            </div>
+            <div class="result-date">02/11/2025</div>
+            <div class="result-status ok">Normal</div>
+          </div>
+          <div class="result-item ok">
+            <div class="result-info">
+              <h4>Échographie abdominale</h4>
+              <p>Centre Imagerie Médicale</p>
+            </div>
+            <div class="result-date">20/10/2025</div>
+            <div class="result-status ok">Normal</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Fichiers Médicaux -->
+      <section id="fichiers" class="tab">
+        <h2 class="section-title">Fichiers Envoyés par mon Médecin</h2>
+        <div class="files-grid">
+          <div class="file-card">
+            <i class="fas fa-file-pdf text-4xl text-red-600"></i>
+            <p>ordonnance_du_08-12-2025.pdf</p>
+            <span class="file-date">08/12/2025</span>
+          </div>
+          <div class="file-card">
+            <i class="fas fa-file-pdf text-4xl text-red-600"></i>
+            <p>certificat_medical_2025.pdf</p>
+            <span class="file-date">01/12/2025</span>
+          </div>
+          <div class="file-card">
+            <i class="fas fa-file-image text-4xl text-blue-600"></i>
+            <p>radio_poignet_gauche.jpg</p>
+            <span class="file-date">20/11/2025</span>
+          </div>
+          <div class="file-card">
+            <i class="fas fa-file-pdf text-4xl text-red-600"></i>
+            <p>compte_rendu_consultation.pdf</p>
+            <span class="file-date">08/12/2025</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- NOUVEL ONGLETS : MESSAGERIE -->
+      <section id="messagerie" class="tab">
+        <h2 class="section-title">Messagerie avec votre médecin</h2>
+        <div class="chat-container">
+          <div class="chat-header">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" class="doctor-pic" />
+            <div>
+              <strong>Dr. Martin Dupont</strong>
+              <p class="online">En ligne</p>
+            </div>
+          </div>
+          <div class="chat-messages" id="chatMessages">
+            <div class="msg received">
+              <p>Bonjour Mme Dupont, comment allez-vous aujourd’hui ?</p>
+              <span>10:23</span>
+            </div>
+            <div class="msg sent">
+              <p>Bonjour docteur, ça va mieux merci !</p>
+              <span>10:25</span>
+            </div>
+          </div>
+          <div class="chat-input">
+            <label class="attach-btn"><i class="fas fa-paperclip"></i>
+              <input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png" />
+            </label>
+            <input type="text" id="messageInput" placeholder="Écrivez votre message..." />
+            <button id="sendBtn"><i class="fas fa-paper-plane"></i></button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

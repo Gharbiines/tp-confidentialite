@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Beneccion - Médecin</title>
+  <link rel="stylesheet" href="medcin.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- ==================== DASHBOARD ==================== -->
+  <div id="dashboard" class="page active">
+    <header class="header">
+      <div class="container header-content">
+        <div class="logo">
+          <i class="fas fa-stethoscope"></i>
+          <h1>Beneccion</h1>
+        </div>
+        <div class="user">
+          <span>Dr. Martin Dupont</span>
+          <div class="avatar">MD</div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <h2 class="title">Liste des Patients</h2>
+
+      <div class="card">
+        <div class="search-bar">
+          <input type="text" placeholder="Rechercher un patient..." />
+        </div>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Patient</th>
+              <th>Âge</th>
+              <th>Dernière consultation</th>
+              <th>Statut</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="patient-row" data-name="Dupont Marie" data-age="45">
+              <td class="font-medium">Dupont Marie</td>
+              <td>45 ans</td>
+              <td>08/12/2025</td>
+              <td><span class="status ok">OK</span></td>
+            </tr>
+            <tr class="patient-row" data-name="Durand Paul" data-age="62">
+              <td class="font-medium">Durand Paul</td>
+              <td>62 ans</td>
+              <td>05/12/2025</td>
+              <td><span class="status fail">Échue</span></td>
+            </tr>
+            <tr class="patient-row" data-name="Leroy Sophie" data-age="34">
+              <td class="font-medium">Leroy Sophie</td>
+              <td>34 ans</td>
+              <td>03/12/2025</td>
+              <td><span class="status soon">À venir</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <!-- ==================== FICHE PATIENT ==================== -->
+  <div id="patientPage" class="page">
+    <header class="header">
+      <div class="container header-content">
+        <button id="backBtn" class="back-btn">Retour</button>
+        <h1 id="patientHeader" class="title">Patient – 0 ans</h1>
+        <div class="avatar">MD</div>
+      </div>
+    </header>
+
+    <main class="container grid-patient">
+      <div class="card info-card">
+        <h3>Informations personnelles</h3>
+        <ul>
+          <li><strong>Téléphone :</strong> <span id="tel"></span></li>
+          <li><strong>Adresse :</strong> <span id="adresse"></span></li>
+          <li><strong>Groupe sanguin :</strong> <span id="sang" class="blood"></span></li>
+        </ul>
+        <p class="mt-4 text-sm text-gray-500">
+          Dernière consultation : <strong id="lastConsult"></strong>
+        </p>
+      </div>
+
+      <div class="actions-grid">
+        <button class="action-btn active" data-tab="historique">
+          <i class="fas fa-history"></i>
+          Historique des visites
+        </button>
+        <button class="action-btn yellow" data-tab="labo">
+          <i class="fas fa-vial"></i>
+          Résultats Labo<br><small>(12 analyses)</small>
+        </button>
+        <button class="action-btn" data-tab="chat">
+          <i class="fas fa-comments"></i>
+          Ordonnances & Chat
+        </button>
+      </div>
+    </main>
+
+    <section class="container mt-8" id="tabContent">
+      <div id="historique" class="tab-card active">
+        <h3>Historique des consultations</h3>
+        <p class="text-gray-600">Liste complète des visites à venir…</p>
+      </div>
+
+      <div id="labo" class="tab-card">
+        <div class="flex-between mb-4">
+          <h3>Résultats de Laboratoire</h3>
+          <button class="btn-primary">Télécharger PDF</button>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Analyse</th>
+              <th>Date</th>
+              <th>État</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Bilan sanguin complet</td>
+              <td>08/12/2025</td>
+              <td><span class="status ok">Normal</span></td>
+            </tr>
+            <tr>
+              <td>Glycémie à jeun</td>
+              <td>15/11/2025</td>
+              <td><span class="status fail">Anormal</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div id="chat" class="tab-card">
+        <div class="chat-grid">
+          <div class="ordonnances-card">
+            <h3>Dernières ordonnances</h3>
+            <div class="ordo-item">
+              <strong>08/12/2025</strong>
+              <p>Paracétamol 1g – 3x/jour – 5 jours</p>
+            </div>
+            <div class="ordo-item">
+              <strong>15/11/2025</strong>
+              <p>Amoxicilline 1g – 2x/jour – 7 jours</p>
+            </div>
+            <button id="newOrdonnanceBtn" class="btn-yellow mt-6 w-full text-lg font-bold">
+  + Nouvelle ordonnance
+</button>
+          </div>
+
+          <div class="chat-box">
+            <div class="chat-header">Chat avec <span id="chatName"></span></div>
+            <div class="chat-messages">
+              <div class="msg sent">
+                <p>Bonjour Mme Dupont, voici votre nouvelle ordonnance</p>
+                <span>14:32</span>
+              </div>
+              <div class="msg received">
+                <p>Bonjour docteur, merci !</p>
+                <span>14:35</span>
+              </div>
+            </div>
+            <div class="chat-input">
+              <input type="text" placeholder="Écrivez votre message..." />
+              <button>Envoyer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
